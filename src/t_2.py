@@ -1,5 +1,5 @@
 '''
- * @desc : 训练mnist
+ * @desc : mlp训练mnist
  * @auth : TYF
  * @date : 2019/8/31 - 15:58
 '''
@@ -12,7 +12,7 @@ import tensorflow.examples.tutorials.mnist.input_data as input_data
 from time import time
 
 #数据load
-mnist = input_data.read_data_sets('E:/work/pycharm_space/dataSet/mnist/',one_hot=True)
+mnist = input_data.read_data_sets('C:/work/dataSet/mnist/',one_hot=True)
 
 print('---------------------样本个数--------------------------')
 print('train:',mnist.train.num_examples)
@@ -49,17 +49,18 @@ def layer(in_dim,out_dim,input,activation=None):
 
 #正向传播
 x = tf.placeholder('float',[None,784]) #样本1*784
-h1 = layer(784,out_dim=256,input=x,activation=tf.nn.relu) #建立隐层h1 返回h1的我输出
-h2 = layer(in_dim=256,out_dim=10,input=h1,activation=None) #建立隐层h2 这里直接输出10维label
+h1 = layer(in_dim=784,out_dim=1000,input=x,activation=tf.nn.relu)  #输入层 第一隐层
+h2 = layer(in_dim=1000,out_dim=1000,input=h1,activation=tf.nn.relu)  #第二隐层
+h3 = layer(in_dim=1000,out_dim=10,input=h2,activation=None)   #输出层
 #反向传播
 y = tf.placeholder('float',[None,10])
 #损失函数
-loss_function = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=h1,labels=h2)) #1.函数softmax_cross_entropy_with_logits交叉熵  2.logits设置真实值  3.labels设置预测值 4.reduce_mean是取平均值
+loss_function = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=h3,labels=y)) #1.函数softmax_cross_entropy_with_logits交叉熵  2.logits设置真实值  3.labels设置预测值 4.reduce_mean是取平均值
 #优化器
 optimizer = tf.train.AdamOptimizer(learning_rate=0.001).minimize(loss_function) #设置学习率
 #评分器
-is_predict_right = tf.equal(tf.argmax(y,1),tf.argmax(h2,1)) #判断真实值y和预测值h2是否相等  正确返回1错误返回0
-accuracy = tf.reduce_mean(tf.cast(is_predict_right,'float')) #计算1和0的平均值
+is_predict_right = tf.equal(tf.argmax(y,1),tf.argmax(h3,1)) #判断真实值y和预测值h3是否相等  正确返回1错误返回0
+accuracy = tf.reduce_mean(tf.cast(is_predict_right,'float')) #计算1和0的比例
 #迭代次数
 epoch = 15
 #抓取size
@@ -93,7 +94,40 @@ for e in range(epoch):
     accuracy_list.append(acc)
     lost_list.append(loss)
     #打印本次迭代评分
-    print('epoch=','%2d'%(e+1),'accuracy=',accuracy_list,'lost=','{:.9f}'.format(loss))
+    print('epoch=','%2d'%(e+1),'accuracy=',acc,'lost=','{:.9f}'.format(loss))
 #计算训练总耗时
 duration = time()-start_time
 print('duration=',duration)
+
+
+#作图
+#epoch= 15 accuracy= [0.8538, 0.8974, 0.9136, 0.9206, 0.9258, 0.9322, 0.9336, 0.9366, 0.9414, 0.9396, 0.9404, 0.9432, 0.9448, 0.9426, 0.9458] lost= 1.313437343
+#误差率
+fig =  plt.gcf()
+fig.set_size_inches(4,2) #图大小4行4列
+plt.plot(epoch_list,lost_list,label ='loss') #xy轴数据
+plt.ylabel('loss') #y轴label
+plt.xlabel('epoch') #x轴label
+plt.legend(['loss'],loc='upper left')
+#准确率
+plt.plot(epoch_list,accuracy_list,label ='accuracy')
+fig =  plt.gcf()
+fig.set_size_inches(4,2) #图大小4行4列
+plt.ylim(0.8,1)
+plt.ylabel('accuracy') #y轴label
+plt.xlabel('epoch') #x轴label
+plt.legend()
+plt.show()
+
+
+#计算测试机准确率和误差
+print('test accuracy:',sess.run(accuracy,feed_dict={x:mnist.test.images,y:mnist.test.labels}))
+#获取预测结果
+prediction_result = sess.run(tf.argmax(h3,1),feed_dict={x:mnist.test.images}) #h2输出层的输出是onehot编码 使用argmax还原
+#对比预测值和输出值:
+for i in range(len(prediction_result)):
+    print('样本',i,'predict=',prediction_result[i],'label=',mnist.test.labels[i])
+
+
+
+
