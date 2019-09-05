@@ -26,12 +26,31 @@
 							t_1
 						</td>
 						<td>
+							<span>张量运算仿真神经网络的运行</span>
+						</td>
+						<td>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							t_2
+						</td>
+						<td>
 							<span>mlp训练mnist</span>
 						</td>
 						<td>
 						</td>
 					</tr>
-
+                  					<tr>
+						<td>
+							t_2
+						</td>
+						<td>
+							<span>cnn训练mnist</span>
+						</td>
+						<td>
+						</td>
+					</tr>
 				</tbody>
 			</table>
 		</div>
