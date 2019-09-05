@@ -43,10 +43,20 @@
 					</tr>
                   					<tr>
 						<td>
-							t_2
+							t_3
 						</td>
 						<td>
 							<span>cnn训练mnist</span>
+						</td>
+						<td>
+						</td>
+					</tr>
+                                    					<tr>
+						<td>
+							t_4
+						</td>
+						<td>
+							<span>sorfmax训练mnist</span>
 						</td>
 						<td>
 						</td>
