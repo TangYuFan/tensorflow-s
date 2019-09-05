@@ -1,5 +1,5 @@
 '''
- * @desc : tensorflow实现
+ * @desc : tensorflow实现 softmax(tf.matmul(x,w)+b
  * @auth : TYF
  * @date : 2019/8/31 - 15:58
 '''
@@ -50,6 +50,13 @@ acc2 = sess.run(accuracy,feed_dict={x:mnist.validation.images,y_:mnist.validatio
 
 print('acc1:',acc1)
 print('acc2:',acc2)
+
+
+'''
+每次迭代(即每次权重更新前),都多次小批量样本进行随机梯度下降,相对于全部样本进行梯度下降更容易跳出局部最优,也跟容易收敛
+'''
+
+
 
 
 '''
