@@ -29,15 +29,15 @@ print('shape 0:',mnist.train.images[0])
 
 #权重(过滤器)建立函数
 def weight(shape):
-    return tf.Variable(tf.truncated_normal(shape,stddev=0.1),name='W') #truncated_normal函数产生截断正态分布随机数初始化权重
+    return tf.Variable(tf.truncated_normal(shape=shape,stddev=0.1),name='W') #truncated_normal函数产生截断正态分布随机数初始化权重
 
 #偏差建立函数
 def bias(shape):
-    return tf.Variable(tf.constant(0.1,shape=shape),name='B') #常数0.1初始化偏差张量
+    return tf.Variable(tf.constant(value=0.1,shape=shape),name='B') #常数0.1初始化偏差张量
 
 #卷积计算函数 输入28x28,输出28x28
 def conv2d(x,W):
-    return tf.nn.conv2d(x,W,padding='SAME',strides=[1,1,1,1])
+    return tf.nn.conv2d(x,W,strides=[1,1,1,1],padding='SAME')
     #x:输入参数,必须为4维张量
     #W:滤镜权重
     #strdes:步长[1,s,s,1],滤镜每次移动时从左到右一步,从上到下一步
@@ -61,7 +61,7 @@ c1_Conv = tf.nn.relu(Conv1) #得到16层 28x28
 #池化1
 c1_Pool = max_pool_2x2(c1_Conv) #得到16层 14x14
 #卷积2
-W2 = weight([1,5,5,32]) #32个 5x5的卷积核
+W2 = weight([5,5,1,32]) #32个 尺寸为5x5的卷积核
 B2 = bias([32])  #偏差
 Conv2 = conv2d(c1_Pool,W2)+B2
 c2_Conv = tf.nn.relu(Conv2) #得到32层 14x14
