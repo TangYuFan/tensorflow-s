@@ -56,7 +56,7 @@
 							t_4
 						</td>
 						<td>
-							<span>sorfmax训练mnist</span>
+							<span>softmax(tf.matmul(x,w)+b)实现mnist分类</span>
 						</td>
 						<td>
 						</td>
