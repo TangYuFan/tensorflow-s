@@ -71,6 +71,46 @@
 						<td>
 						</td>
 					</tr>
+                                                                        					<tr>
+						<td>
+							t_6
+						</td>
+						<td>
+							<span>实现alexNet</span>
+						</td>
+						<td>
+						</td>
+					</tr>
+                                                                                          					<tr>
+						<td>
+							t_7
+						</td>
+						<td>
+							<span>实现vggNet</span>
+						</td>
+						<td>
+						</td>
+					</tr>
+                                                                                                            					<tr>
+						<td>
+							t_8
+						</td>
+						<td>
+							<span>实现googleInceptionNet</span>
+						</td>
+						<td>
+						</td>
+					</tr>
+                                                                                                                              					<tr>
+						<td>
+							t_9
+						</td>
+						<td>
+							<span>实现resNet</span>
+						</td>
+						<td>
+						</td>
+					</tr>
 				</tbody>
 			</table>
 		</div>
