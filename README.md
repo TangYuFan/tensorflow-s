@@ -76,7 +76,7 @@
 							t_6
 						</td>
 						<td>
-							<span>实现alexNet</span>
+							<span>实现alexNet网络</span>
 						</td>
 						<td>
 						</td>
@@ -86,7 +86,7 @@
 							t_7
 						</td>
 						<td>
-							<span>实现vggNet</span>
+							<span>实现vggNet网络</span>
 						</td>
 						<td>
 						</td>
@@ -96,7 +96,7 @@
 							t_8
 						</td>
 						<td>
-							<span>实现googleInceptionNet</span>
+							<span>实现googleInceptionNet网络</span>
 						</td>
 						<td>
 						</td>
@@ -106,7 +106,7 @@
 							t_9
 						</td>
 						<td>
-							<span>实现resNet</span>
+							<span>实现resNet网络</span>
 						</td>
 						<td>
 						</td>
