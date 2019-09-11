@@ -18,10 +18,15 @@ Inception Module     --->   (2)1x1的卷积接3x3的卷积      --->   concat聚
    而这里将每层输出都统一到N(0,1)的正态分布上，所以可以用大学习速率来加快训练。
 4. NiNi网络。使用了mlpconv层。
    mlpconv = convolution + mlp
-   mlpconv = convolution + 1*1卷积 + 1*1卷积
+   mlpconv = convolution + 1*1卷积 + ReLU激活
 5. 全局平均池化代替全连接层。防止过拟合。
 6. 5*5的卷积用2个3*3替换。
    保持相同感受野的同时减少参数，加强非线性的表达能力。
+
+
+   设计InceptionModule的重要原则:
+        图片的尺寸是不断缩小的,输出通道数持续增加
+
 
 '''
 from datetime import datetime
@@ -71,8 +76,7 @@ def inception_v3_base(inputs, scope=None):
         input:299x299x3
         output:35x35x192
         '''
-        with slim.arg_scope([slim.conv2d, slim.max_pool2d, slim.avg_pool2d],
-                            stride=1, padding='VALID'):
+        with slim.arg_scope([slim.conv2d, slim.max_pool2d, slim.avg_pool2d],stride=1, padding='VALID'):
             net = slim.conv2d(inputs, 32, [3, 3], stride=2, scope='Conv2d_1a_3x3')
             net = slim.conv2d(net, 32, [3, 3], scope='Conv2d_2a_3x3')
             net = slim.conv2d(net, 64, [3, 3], padding='SAME', scope='Conv2d_2b_3x3')
@@ -81,8 +85,7 @@ def inception_v3_base(inputs, scope=None):
             net = slim.conv2d(net, 192, [3, 3], scope='Conv2d_4a_3x3')
             net = slim.max_pool2d(net, [3, 3], stride=2, scope='MaxPool_5a_3x3')
 
-        with slim.arg_scope([slim.conv2d, slim.max_pool2d, slim.avg_pool2d],
-                            stride=1, padding='SAME'):
+        with slim.arg_scope([slim.conv2d, slim.max_pool2d, slim.avg_pool2d],stride=1, padding='SAME'):
             '''
             第一个Inception模块组：第一个Module
             input:35x35x192
@@ -336,7 +339,7 @@ def incepiton_v3(inputs,
     '''
     inputs: 输入
     num_class: 最后需要分类的总数
-    is_training: 标志是否是训练过程，对BN和Dropout有影响
+    is_training: 标志是否是训练过程，训练时才会启用BN和Dropout
     dropout_keep_prob: 保留节点的比例
     prediction_fn: 用来分类的函数
     spatial_squeeze: 是否要将型如5x3x1--->5x3
