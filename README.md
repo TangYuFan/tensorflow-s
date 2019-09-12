@@ -111,6 +111,16 @@
 						<td>
 						</td>
 					</tr>
+                                                                                                                                                					<tr>
+						<td>
+							t_10
+						</td>
+						<td>
+							<span>实现word2Vec(skip-gram)</span>
+						</td>
+						<td>
+						</td>
+					</tr>
 				</tbody>
 			</table>
 		</div>
