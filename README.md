@@ -121,6 +121,16 @@
 						<td>
 						</td>
 					</tr>
+                                                                                                                                                                					<tr>
+						<td>
+							t_11
+						</td>
+						<td>
+							<span>实现基于LSTM的语言模型</span>
+						</td>
+						<td>
+						</td>
+					</tr>
 				</tbody>
 			</table>
 		</div>
