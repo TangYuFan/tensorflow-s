@@ -131,6 +131,16 @@
 						<td>
 						</td>
 					</tr>
+                                                                                                                                                                                  					<tr>
+						<td>
+							t_11
+						</td>
+						<td>
+							<span>实现双向循环神经网络Bi-RNN模型</span>
+						</td>
+						<td>
+						</td>
+					</tr>
 				</tbody>
 			</table>
 		</div>
