@@ -126,7 +126,7 @@
 							t_11
 						</td>
 						<td>
-							<span>实现基于LSTM的语言模型</span>
+							<span>实现基于lstm的语言模型</span>
 						</td>
 						<td>
 						</td>
