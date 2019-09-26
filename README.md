@@ -133,7 +133,7 @@
 					</tr>
                                                                                                                                                                                   					<tr>
 						<td>
-							t_11
+							t_12
 						</td>
 						<td>
 							<span>实现双向循环神经网络Bi-RNN模型</span>
