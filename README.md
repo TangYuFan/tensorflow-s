@@ -141,6 +141,16 @@
 						<td>
 						</td>
 					</tr>
+                                                                                                                                                                                                    					<tr>
+						<td>
+							t_13
+						</td>
+						<td>
+							<span>实现GAN 生成mnist样本</span>
+						</td>
+						<td>
+						</td>
+					</tr>
 				</tbody>
 			</table>
 		</div>
